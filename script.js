@@ -12,6 +12,15 @@ function render (html) {
 */
 function greet () {
   // TODO: Write your code here
+  const username = prompt("What is your name?");
+  if (!username || !username.trim()) {
+      //check for empty or canceled input
+      render("<p class='text-muted'>No name entered.</p>")
+      return //exit the function early
+    }
+    else {
+      render(`<p> Hello ${username} </p>`)
+    }
 }
 
 /* 
@@ -24,6 +33,20 @@ function greet () {
 */
 function averageNumbers () {
   // TODO: Write your code here
+  const nums = prompt('Enter a list of numbers, separated by commas:')
+  if (!nums) {
+    render("<p class='text-muted'>No numbers entered.</p>")
+    return
+  }
+
+  const numArray = nums
+                    .split(',')
+                    .map(n => parseFloat(n.trim()))
+                    .filter(n => !isNaN(n)) //remove invalid numbers
+
+  const sum = numArray.reduce((a,b) => a + b, 0)
+
+  const avg = sum / numArray.length
 }
 
 /* 
