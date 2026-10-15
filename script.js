@@ -3,6 +3,15 @@ function render (html) {
   document.getElementById('out').innerHTML = html
 }
 
+
+
+
+
+
+
+
+
+
 /* 
   Function 1 — greet()
   ---------------------
@@ -22,6 +31,15 @@ function greet () {
       render(`<p> Hello ${username} </p>`)
     }
 }
+
+
+
+
+
+
+
+
+
 
 /* 
   Function 2 — averageNumbers()
@@ -47,7 +65,25 @@ function averageNumbers () {
   const sum = numArray.reduce((a,b) => a + b, 0)
 
   const avg = sum / numArray.length
+
+  const list = numArray
+                    .map(n => `<li class = "list-group-item"> ${n}</li>`)
+                    .join("");
+                  
+                    render(`
+                      <p>Average:<strong>${avg}</strong></p>
+                      <ul class="list-group"> ${list}</ul>
+                    `)
 }
+
+
+
+
+
+
+
+
+
 
 /* 
   Function 3 — timeOfDay()
@@ -58,7 +94,26 @@ function averageNumbers () {
 */
 function timeOfDay () {
   // TODO: Write your code here
+  const h = new Date().getHours()
+  
+  let msg = ''
+
+  if (h<12) {msg = "Good Morning!"}
+    else if (h>12 && h<15) {msg = "Good Afternoon!"}
+    else if (h>15 && h<18) { msg = "Good Evening"}
+    else {msg = "Good Night"}
+
+    render(`<p>${msg}`)
 }
+
+
+
+
+
+
+
+
+
 
 /* 
   Function 4 — randomBetween()
@@ -72,6 +127,15 @@ function randomBetween () {
   // TODO: Write your code here
 }
 
+
+
+
+
+
+
+
+
+
 /* 
   Function 5 — clearOutput()
   ---------------------------
@@ -80,6 +144,7 @@ function randomBetween () {
 */
 function clearOutput () {
   // TODO: Write your code here
+  render("<p class='text-muted'>No numbers entered.</p>")
 }
 
 // ---- Event listeners for the demo buttons ----
@@ -103,3 +168,24 @@ document.getElementById('btnClear').addEventListener('click', clearOutput)
   Write each function below, and don’t forget to connect each one 
   to a new button in index.html using addEventListener.
 */
+
+function newtitle () {
+  // to do - change the page title text to something new
+}
+
+function colorcycle () {
+  // to do - each time you press the button, the output text color cycles through a few choices (red, green, orange, etc.)
+}
+
+function bgcolor () {
+  // to do - press the button to change the bg color of the output box to a random color
+}
+
+function doublenumber () {
+  // to do - ask the user for a number and display that number doubled
+}
+
+document.getElementById('btnNewTitle').addEventListener('click', newtitle)
+document.getElementById('btnColorCycle').addEventListener('click', colorcycle)
+document.getElementById('btnBgColor').addEventListener('click', bgcolor)
+document.getElementById('btnDoubleNumber').addEventListener('click', doublenumber)
