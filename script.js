@@ -4,14 +4,6 @@ function render (html) {
 }
 
 
-
-
-
-
-
-
-
-
 /* 
   Function 1 — greet()
   ---------------------
@@ -31,14 +23,6 @@ function greet () {
       render(`<p> Hello ${username} </p>`)
     }
 }
-
-
-
-
-
-
-
-
 
 
 /* 
@@ -77,14 +61,6 @@ function averageNumbers () {
 }
 
 
-
-
-
-
-
-
-
-
 /* 
   Function 3 — timeOfDay()
   -------------------------
@@ -107,14 +83,6 @@ function timeOfDay () {
 }
 
 
-
-
-
-
-
-
-
-
 /* 
   Function 4 — randomBetween()
   -----------------------------
@@ -124,16 +92,17 @@ function timeOfDay () {
   - Handle invalid input (like blanks or min >= max)
 */
 function randomBetween () {
-  // TODO: Write your code here
+  const min = parseInt(prompt('Enter the minimum number:'), 10)
+  const max = parseInt(prompt('Enter the maximum number:'), 10)
+
+  if (isNaN(min) || isNaN(max) || min >= max) {
+    render("<p class='text-muted'>Enter valid numbers with the minimum below the maximum.</p>")
+    return
+  }
+
+  const random = Math.floor(Math.random() * (max - min + 1)) + min
+  render(`<p>Random number: <strong>${random}</strong></p>`)
 }
-
-
-
-
-
-
-
-
 
 
 /* 
@@ -144,6 +113,9 @@ function randomBetween () {
 */
 function clearOutput () {
   // TODO: Write your code here
+  const output = document.getElementById('out')
+  output.classList.remove('bg-light')
+  output.style.backgroundColor = 'white'
   render("<p class='text-muted'>No numbers entered.</p>")
 }
 
@@ -153,6 +125,8 @@ document.getElementById('btnAvg').addEventListener('click', averageNumbers)
 document.getElementById('btnTime').addEventListener('click', timeOfDay)
 document.getElementById('btnRandom').addEventListener('click', randomBetween)
 document.getElementById('btnClear').addEventListener('click', clearOutput)
+
+
 
 /* 
   ------------------------------------------
@@ -169,23 +143,41 @@ document.getElementById('btnClear').addEventListener('click', clearOutput)
   to a new button in index.html using addEventListener.
 */
 
-function newtitle () {
-  // to do - change the page title text to something new
+function ChangeTitle () {
+  document.title = 'Functions Refresher'
+  document.getElementById('pageTitle').textContent = 'Functions Refresher'
 }
 
-function colorcycle () {
-  // to do - each time you press the button, the output text color cycles through a few choices (red, green, orange, etc.)
+
+let CycleColorIndex = 0
+function CycleColor () {
+  const colors = ['red', 'green', 'orange', 'blue']
+  const output = document.getElementById('out')
+  output.style.color = colors[CycleColorIndex]
+  CycleColorIndex = (CycleColorIndex + 1) % colors.length
 }
 
-function bgcolor () {
-  // to do - press the button to change the bg color of the output box to a random color
+
+function BgColor () {
+  const output = document.getElementById('out')
+  output.classList.remove('bg-light')
+  output.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 85%)`
 }
 
-function doublenumber () {
-  // to do - ask the user for a number and display that number doubled
+
+function Double () {
+  const number = parseFloat(prompt('Please enter a number:'))
+  if (!number) {
+    render("<p class='text-muted'>Please enter a valid number.</p>")
+    return
+  }
+  else {
+    render(`<p>${number} doubled is ${number * 2}</p>`)
+  }
 }
 
-document.getElementById('btnNewTitle').addEventListener('click', newtitle)
-document.getElementById('btnColorCycle').addEventListener('click', colorcycle)
-document.getElementById('btnBgColor').addEventListener('click', bgcolor)
-document.getElementById('btnDoubleNumber').addEventListener('click', doublenumber)
+
+document.getElementById('btnChangeTitle').addEventListener('click', ChangeTitle)
+document.getElementById('btnCycleColor').addEventListener('click', CycleColor)
+document.getElementById('btnBgColor').addEventListener('click', BgColor)
+document.getElementById('btnDouble').addEventListener('click', Double)
